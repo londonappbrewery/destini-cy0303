@@ -9,7 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    var storyIndex : Int  = 1
+    let storyArray = ["story1", "story2", "story3", "story4", "story5", "story6"]
+    
     // Our strings
     let story1 = "Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: \"Need a ride, boy?\"."
     let answer1a = "I\'ll hop in. Thanks for the help!"
@@ -33,6 +36,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!         // Has TAG = 1
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
+    @IBOutlet weak var storyProgress: UILabel!
     
     // TODO Step 5: Initialise instance variables here
     
@@ -41,25 +45,64 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
         
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
         
     }
-
+ 
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
-    
-        // TODO Step 4: Write an IF-Statement to update the views
-                
-        // TODO Step 6: Modify the IF-Statement to complete the story
-        
-    
+ 
+        if storyIndex == 1 && sender.tag == 1 {
+            storyTextView.text = story3
+            topButton.setTitle(answer3a, for: .normal)
+            bottomButton.setTitle(answer3b, for: .normal)
+            storyIndex = 3
+            updateUI()
+        } else if storyIndex == 1 && sender.tag == 2 {
+                storyTextView.text = story2
+                topButton.setTitle(answer2a, for: .normal)
+                bottomButton.setTitle(answer2b, for: .normal)
+                storyIndex = 2
+                updateUI()
+        } else if storyIndex == 3 && sender.tag == 1 {
+                storyTextView.text = story6
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                storyIndex = 6
+                updateUI()
+
+        } else if storyIndex == 3 && sender.tag == 2 {
+            storyTextView.text = story5
+            topButton.isHidden = true
+            bottomButton.isHidden = true
+            storyIndex = 5
+            updateUI()
+
+        } else if storyIndex == 2 && sender.tag == 1 {
+            storyTextView.text = story3
+            topButton.setTitle(answer3a, for: .normal)
+            bottomButton.setTitle(answer3b, for: .normal)
+            storyIndex = 3
+            updateUI()
+
+        } else  {
+            storyTextView.text = story4
+            topButton.isHidden = true
+            bottomButton.isHidden = true
+            storyIndex = 4
+            updateUI()
+
+        }
+
     }
-    
-
-
-
+    func updateUI() {
+        storyProgress.text = "\(storyIndex) / 6"
+    }
+       
 }
 
